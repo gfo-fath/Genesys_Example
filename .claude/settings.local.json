@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn clean:*)",
+      "Bash(mvn spring-boot:run)",
+      "Bash(mvn spring-boot:run -DskipTests)",
+      "Bash(taskkill:*)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :9010)",
+      "Bash(tasklist)",
+      "Bash(findstr 22512)",
+      "Bash(curl -I http://localhost:8060/api/customers/stats/count?status=ACTIVE)",
+      "Bash(java -version)",
+      "Bash(mvn -v)",
+      "Bash(curl -v \"http://localhost:8060/api/customers/stats/count?status=ACTIVE\")",
+      "Bash(findstr :8060)",
+      "Bash(powershell -Command \"Stop-Process -Id 16340 -Force\")"
+    ]
+  }
+}

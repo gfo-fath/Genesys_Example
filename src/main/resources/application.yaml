@@ -1,0 +1,73 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: Genesys_Example
+
+  # MySQL Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/genesys_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    username: root
+    password: 7G0&796R6s9E
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+  # Redis Configuration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 60000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+  # MySQL Configuration - Remove H2 console and Flowable exclusions for production
+
+# Genesys Configuration
+genesys:
+  gcti:
+    server-url: ws://localhost:8060/gcti
+    username: admin
+    password: password
+  composer:
+    api-url: http://localhost:8060/composer
+  logging:
+    level: DEBUG
+
+# Logging Configuration
+logging:
+  level:
+    com.gfo.demo: DEBUG
+    org.springframework.data.redis: DEBUG
+    org.flowable: INFO
+  file:
+    name: logs/genesys-example.log
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,loggers
