@@ -22,6 +22,7 @@ server.log
 
 ### NetBeans ###
 /logs/
+/logs/genesys-example.log
 /nbproject/private/
 /nbbuild/
 /dist/

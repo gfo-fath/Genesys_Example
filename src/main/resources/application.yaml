@@ -54,6 +54,11 @@ genesys:
     api-url: http://localhost:8060/composer
   logging:
     level: DEBUG
+  sip:
+    server-url: sip.genesys.com
+    port: 5060
+    username: genesys_user
+    password: genesys_pass
 
 # Logging Configuration
 logging:

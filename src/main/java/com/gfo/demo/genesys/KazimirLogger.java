@@ -113,4 +113,70 @@ public class KazimirLogger {
         logWriters.values().forEach(PrintWriter::close);
         logWriters.clear();
     }
+
+    // 新增的呼叫日志方法
+    public void logCallStart(String agentId, String phoneNumber, String customerId) {
+        String logEntry = String.format("[%s] [INFO] [CALL:START] Agent: %s, Phone: %s, Customer: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                agentId, phoneNumber, customerId != null ? customerId : "Unknown");
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
+
+    public void logCallSuccess(String callId, String action) {
+        String logEntry = String.format("[%s] [INFO] [CALL:SUCCESS] CallID: %s, Action: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                callId, action);
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
+
+    public void logCallError(String agentId, String callId, String error) {
+        String logEntry = String.format("[%s] [ERROR] [CALL:ERROR] Agent: %s, CallID: %s, Error: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                agentId, callId, error);
+        writeToFile("calls", logEntry);
+        logger.error(logEntry);
+    }
+
+    public void logCallAnswer(String agentId, String callId) {
+        String logEntry = String.format("[%s] [INFO] [CALL:ANSWER] Agent: %s, CallID: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                agentId, callId);
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
+
+    public void logCallEnd(String callId) {
+        String logEntry = String.format("[%s] [INFO] [CALL:END] CallID: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                callId);
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
+
+    public void logCallHold(String callId, boolean hold) {
+        String action = hold ? "HOLD" : "UNHOLD";
+        String logEntry = String.format("[%s] [INFO] [CALL:%s] CallID: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                action, callId);
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
+
+    public void logCallTransfer(String callId, String targetAgentId) {
+        String logEntry = String.format("[%s] [INFO] [CALL:TRANSFER] CallID: %s, TargetAgent: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                callId, targetAgentId);
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
+
+    public void logCallConference(String callId, String additionalAgentId) {
+        String logEntry = String.format("[%s] [INFO] [CALL:CONFERENCE] CallID: %s, AdditionalAgent: %s",
+                LocalDateTime.now().format(TIMESTAMP_FORMATTER),
+                callId, additionalAgentId);
+        writeToFile("calls", logEntry);
+        logger.info(logEntry);
+    }
 }

@@ -90,6 +90,3 @@ public class Interaction {
     public void setQueueName(String queueName) { this.queueName = queueName; }
 }
 
-enum InteractionStatus {
-    ACTIVE, COMPLETED, ABANDONED, TRANSFERRED
-}

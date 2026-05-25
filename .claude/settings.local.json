@@ -14,7 +14,13 @@
       "Bash(mvn -v)",
       "Bash(curl -v \"http://localhost:8060/api/customers/stats/count?status=ACTIVE\")",
       "Bash(findstr :8060)",
-      "Bash(powershell -Command \"Stop-Process -Id 16340 -Force\")"
+      "Bash(powershell -Command \"Stop-Process -Id 16340 -Force\")",
+      "Bash(mvn compile:*)",
+      "Bash(echo:*)",
+      "Bash(mvn:*)",
+      "Bash(pkill:*)",
+      "Bash(powershell Stop-Process -Name java -Force)",
+      "Bash(jps -l)"
     ]
   }
 }

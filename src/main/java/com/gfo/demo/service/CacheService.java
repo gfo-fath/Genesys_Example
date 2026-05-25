@@ -92,6 +92,24 @@ public class CacheService {
         return get("queue:stats:" + queueName);
     }
 
+    // Call session cache methods
+    public void cacheCallSession(String callId, Object callSession) {
+        put("call:session:" + callId, callSession, 1, TimeUnit.HOURS);
+    }
+
+    public Object getCachedCallSession(String callId) {
+        return get("call:session:" + callId);
+    }
+
+    public void evictCallSessionCache(String callId) {
+        delete("call:session:" + callId);
+    }
+
+    // Clear agent cache
+    public void clearAgentCache(String agentId) {
+        delete("agent:status:" + agentId);
+    }
+
     // Clear all cache (for demo purposes)
     public void clearAllCache() {
         cache.clear();
