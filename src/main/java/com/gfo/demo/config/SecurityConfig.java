@@ -18,7 +18,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.disable()) // 禁用Spring Security CORS（使用WebConfig）
+            .cors(cors -> cors.configurationSource(request -> {
+                var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+                corsConfiguration.setAllowedOriginPatterns(java.util.Arrays.asList("http://localhost:*", "http://127.0.0.1:*"));
+                corsConfiguration.setAllowedMethods(java.util.Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
+                corsConfiguration.setAllowedHeaders(java.util.Arrays.asList("*"));
+                corsConfiguration.setAllowCredentials(false);
+                corsConfiguration.setMaxAge(3600L);
+                return corsConfiguration;
+            }))
             .csrf(csrf -> csrf.disable()) // 禁用CSRF保护（演示环境）
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/api/**").permitAll() // 允许所有API访问
